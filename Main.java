@@ -16,8 +16,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		loadContactList("contacts_1_3fbd59c2fa9d5e1ac543a3c5d20bd90a.txt");
-//		loadInstruction("instructions_3_2e2bbf1f1f9e2f221827413d6c1f46cf.txt");
-		loadInstruction("instructions_5_0fb22ea91b9fea61388a4c765a1e707e.txt");
+		loadInstruction("instructions_3_2e2bbf1f1f9e2f221827413d6c1f46cf.txt");
+//		loadInstruction("instructions_5_0fb22ea91b9fea61388a4c765a1e707e.txt");
 
 		for (String inst : instructionList) {
 			implementInstruction(inst);
@@ -72,6 +72,7 @@ public class Main {
 	}
 
 	private static void implementInstruction(String instruction) {
+		System.out.println("------------------------------------------------------------\nInstruction: " + instruction);
 		if (instruction.indexOf("add ") == 0) {
 			String[] params = instruction.substring(4).split(";");
 			Contact tmpContact = new Contact();
@@ -103,20 +104,26 @@ public class Main {
 					foundContact.setPhone(tmpContact.getPhone());
 				if (tmpContact.getAddress().equals("") == false)
 					foundContact.setAddress(tmpContact.getAddress());
+
+				System.out.println("=> Update contact for " + tmpContact.getName());
 			} else {
 				contactList.add(tmpContact);
+				System.out.println("=> Add new contact for " + tmpContact.getName());
 			}
 		} else if (instruction.indexOf("delete ") == 0) {
 			String[] params = instruction.substring(7).split(";");
 			String name = params[0].trim();
 			String birthday = params.length > 1 ? params[1].trim() : "";
+			int delete_cnt = 0;
 			for (int i = 0; i < contactList.size(); i++) {
 				Contact c = contactList.get(i);
 				if (c.getName().equals(name) && (birthday.equals("") || c.getBirthday().equals(birthday))) {
 					contactList.remove(i);
 					i--;
+					delete_cnt++;
 				}
 			}
+			System.out.println("=> Deleted " + delete_cnt + " record(s)");
 		} else if (instruction.indexOf("query ") == 0) {
 			queryResult = "";
 			String[] params = instruction.substring(6).split(" ");
@@ -129,20 +136,22 @@ public class Main {
 					queryResult += c.toString();
 				}
 			}
+			System.out.println("=> Query result: \n" + queryResult);
 		} else if (instruction.indexOf("save") == 0) {
 			try {
 				// save contact list
-				BufferedWriter bw = new BufferedWriter(new FileWriter(new File("OUTPUT.txt")));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(new File("FINAL_OUTPUT.txt")));
 				for (Contact c : contactList) {
 					bw.write(c.toString() + "\n");
 				}
 				bw.close();
 
-				bw = new BufferedWriter(new FileWriter(new File("REPORT.txt"), true));
+				// save the latest query results
+				bw = new BufferedWriter(new FileWriter(new File("FINAL_REPORT.txt"), true));
 				bw.write(queryResult + "\n"
 						+ "----------------------------------------------------------------------------------------------\n");
-				bw.close();
 
+				bw.close();
 			} catch (IOException e) {
 
 			}
