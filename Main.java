@@ -132,13 +132,13 @@ public class Main {
 		} else if (instruction.indexOf("save") == 0) {
 			try {
 				// save contact list
-				BufferedWriter bw = new BufferedWriter(new FileWriter(new File("OUTPUT1232.txt")));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(new File("OUTPUT.txt")));
 				for (Contact c : contactList) {
 					bw.write(c.toString() + "\n");
 				}
 				bw.close();
 
-				bw = new BufferedWriter(new FileWriter(new File("REPORT13.txt"), true));
+				bw = new BufferedWriter(new FileWriter(new File("REPORT.txt"), true));
 				bw.write(queryResult + "\n"
 						+ "----------------------------------------------------------------------------------------------\n");
 				bw.close();
