@@ -148,9 +148,10 @@ public class Main {
 
 				// save the latest query results
 				bw = new BufferedWriter(new FileWriter(new File("FINAL_REPORT.txt"), true));
-				bw.write(queryResult + "\n"
-						+ "----------------------------------------------------------------------------------------------\n");
-
+				if (queryResult.equals("") == false) {
+					bw.write(queryResult + "\n"
+							+ "----------------------------------------------------------------------------------------------\n");
+				}
 				bw.close();
 			} catch (IOException e) {
 
