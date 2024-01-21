@@ -12,9 +12,9 @@ public class Main {
 	private static QueryResult queryResult = new QueryResult();
 
 	public static void main(String[] args) {
-		loadContactList("contacts_1_3fbd59c2fa9d5e1ac543a3c5d20bd90a.txt");
-//		loadInstruction("instructions_3_2e2bbf1f1f9e2f221827413d6c1f46cf.txt");
-		loadInstruction("instructions_5_0fb22ea91b9fea61388a4c765a1e707e.txt");
+		loadContactList("contact_1.txt");
+//		loadInstruction("instruction_1.txt");
+		loadInstruction("instruction_2.txt");
 
 		for (String inst : instructionList) {
 			implementInstruction(inst);
