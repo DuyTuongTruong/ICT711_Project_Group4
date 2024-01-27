@@ -10,7 +10,7 @@ public class AddInstruction extends Instruction {
 
 	@Override
 	public void implement(ArrayList<Contact> contactList, QueryResult queryResult) {
-		String[] params = getParam().substring(4).split(";");
+		String[] params = getParam().split(";");
 		Contact tmpContact = new Contact();
 		for (String param : params) {
 			param = param.trim();

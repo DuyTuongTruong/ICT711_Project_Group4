@@ -10,7 +10,7 @@ public class DeleteInstruction extends Instruction {
 
 	@Override
 	public void implement(ArrayList<Contact> contactList, QueryResult queryResult) {
-		String[] params = getParam().substring(7).split(";");
+		String[] params = getParam().split(";");
 		String name = params[0].trim();
 		String birthday = params.length > 1 ? params[1].trim() : "";
 		int delete_cnt = 0;
