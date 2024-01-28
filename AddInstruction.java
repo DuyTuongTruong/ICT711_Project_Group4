@@ -4,14 +4,20 @@ import java.util.ArrayList;
 
 public class AddInstruction extends Instruction {
 
+	// Constructor for AddInstruction class
 	public AddInstruction(String param) {
 		super(param);
 	}
-
+	
+	// Implementation of the instruction for adding or updating contacts
 	@Override
 	public void implement(ArrayList<Contact> contactList, QueryResult queryResult) {
+		// Splitting the parameters based on semicolon
 		String[] params = getParam().split(";");
+		// Creating a temporary contact object
 		Contact tmpContact = new Contact();
+		
+		 // Iterating through each parameter to set contact properties
 		for (String param : params) {
 			param = param.trim();
 			if (param.indexOf("name ") == 0) {
@@ -26,6 +32,8 @@ public class AddInstruction extends Instruction {
 				tmpContact.setAddress(param.substring(8).trim());
 			}
 		}
+		
+		// Searching for an existing contact with the same name and birthday
 		Contact foundContact = null;
 		for (Contact c : contactList) {
 			if (c.getName().equals(tmpContact.getName()) && c.getBirthday().equals(tmpContact.getBirthday())) {
@@ -33,6 +41,8 @@ public class AddInstruction extends Instruction {
 				break;
 			}
 		}
+		
+		// Updating or adding the contact based on whether it already exists
 		if (foundContact != null) {
 			if (tmpContact.getEmail().equals("") == false)
 				foundContact.setEmail(tmpContact.getEmail());

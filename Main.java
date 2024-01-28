@@ -12,9 +12,9 @@ public class Main {
 	private static QueryResult queryResult = new QueryResult();
 
 	public static void main(String[] args) {
-		loadContactList("contact_1.txt");
+		loadContactList("contact_1_error.txt");
 //		loadInstruction("instruction_1.txt");
-		loadInstruction("instruction_2.txt");
+		loadInstruction("instruction_2_error.txt");
 
 		for (String inst : instructionList) {
 			implementInstruction(inst);
@@ -49,7 +49,7 @@ public class Main {
 				contactList.add(tmpContact);
 			}
 		} catch (Exception e) {
-
+			System.out.println("Can not read the txt");
 		}
 	}
 
@@ -64,7 +64,7 @@ public class Main {
 				}
 			}
 		} catch (Exception e) {
-
+			System.out.println("Can not read the txt");
 		}
 	}
 
